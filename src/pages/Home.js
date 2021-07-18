@@ -3,6 +3,8 @@ import axios from "axios";
 import "./Home.css";
 import MapView from "./MapView";
 import map from "../assets/images/map.png";
+import { useSelector } from "react-redux";
+import { selectMapView } from "../redux/features/userSlice";
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -10,6 +12,7 @@ class Home extends Component {
       venues: [],
       click: true,
       searchedValue: "",
+      name: "",
     };
   }
   componentDidMount() {
@@ -38,31 +41,7 @@ class Home extends Component {
   }
 
   render() {
-    const ListOnClickHandler = (e) => {
-      console.log(e.item.id);
-      // return (
-      //   <div>
-      //     {this.setState({
-      //       click: false,
-      //     })}
-      //     <MapView
-      //       isMarkerShown
-      //       googleMapURL="https://maps.googleapis.com/maps/api/js?key="
-      //       loadingElement={<div style={{ height: `100%` }} />}
-      //       containerElement={
-      //         <div
-      //           style={{
-      //             marginLeft: `10px`,
-      //             marginRight: `10px`,
-      //             height: `400px`,
-      //           }}
-      //         />
-      //       }
-      //       mapElement={<div style={{ height: `100%` }} />}
-      //     />
-      //   </div>
-      // );
-    };
+    const mapView = useSelector(selectMapView);
     return (
       <div>
         {this.state.click ? (
@@ -102,7 +81,13 @@ class Home extends Component {
                     <div
                       key={item.id}
                       className="restaurant__list"
-                      onClick={ListOnClickHandler}
+                      onClick={() => {
+                        console.log(
+                          item.venue.name +
+                            item.venue.location.address +
+                            mapView
+                        );
+                      }}
                     >
                       Name:-{item.venue.name}
                       <br />
