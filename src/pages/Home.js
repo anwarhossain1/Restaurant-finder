@@ -9,6 +9,7 @@ class Home extends Component {
     this.state = {
       venues: [],
       click: true,
+      searchedValue: "",
     };
   }
   componentDidMount() {
@@ -72,26 +73,46 @@ class Home extends Component {
                 type="text"
                 placeholder="Search Restaurants from Nearby"
                 className="restaurant__search__field"
+                onChange={(event) => {
+                  this.setState({
+                    searchedValue: event.target.value,
+                  });
+                }}
               />
             </div>
+            {console.log(this.state.searchedValue)}
             <div className="restaurant__lists">
               <h2>Restaurants Near 3km of Monsterlab Bangladesh</h2>
-              {this.state.venues.map((item) => {
-                return (
-                  <div
-                    key={item.id}
-                    className="restaurant__list"
-                    onClick={ListOnClickHandler}
-                  >
-                    Name:{item.venue.name}
-                    <br />
-                    Address:-{item.venue.location.address}
-                    <div className="map__icon">
-                      <img src={map} />
+              {this.state.venues
+                .filter((val) => {
+                  if (this.state.searchedValue === "") {
+                    return val;
+                  } else if (
+                    val.venue.name
+                      .toLowerCase()
+                      .includes(this.state.searchedValue.toLocaleLowerCase())
+                  ) {
+                    return val;
+                  } else {
+                    alert("Please write a valid location");
+                  }
+                })
+                .map((item, key) => {
+                  return (
+                    <div
+                      key={item.id}
+                      className="restaurant__list"
+                      onClick={ListOnClickHandler}
+                    >
+                      Name:-{item.venue.name}
+                      <br />
+                      Address:-{item.venue.location.address}
+                      <div className="map__icon">
+                        <img src={map} />
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
             </div>
           </div>
         ) : (
