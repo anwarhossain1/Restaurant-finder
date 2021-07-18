@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import axios from "axios";
-
+import "./Home.css";
+import MapView from "./MapView";
+import map from "../assets/images/map.png";
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       venues: [],
+      click: true,
     };
   }
   componentDidMount() {
@@ -34,24 +37,66 @@ class Home extends Component {
   }
 
   render() {
+    const ListOnClickHandler = (e) => {
+      console.log(e.item.id);
+      // return (
+      //   <div>
+      //     {this.setState({
+      //       click: false,
+      //     })}
+      //     <MapView
+      //       isMarkerShown
+      //       googleMapURL="https://maps.googleapis.com/maps/api/js?key="
+      //       loadingElement={<div style={{ height: `100%` }} />}
+      //       containerElement={
+      //         <div
+      //           style={{
+      //             marginLeft: `10px`,
+      //             marginRight: `10px`,
+      //             height: `400px`,
+      //           }}
+      //         />
+      //       }
+      //       mapElement={<div style={{ height: `100%` }} />}
+      //     />
+      //   </div>
+      // );
+    };
     return (
       <div>
-        this is ane
-        <div>
-          <input type="text" placeholder="Search Restaurants from Nearby" />
-        </div>
-        <div>
-          Restaurants Near 3km of Monsterlab Bangladesh
-          {this.state.venues.map((item) => {
-            return (
-              <div key={item.id}>
-                {item.venue.name}
-                <br />
-                {item.venue.location.address}
-              </div>
-            );
-          })}
-        </div>
+        {this.state.click ? (
+          <div className="restaurant__main">
+            <h1>Restaurant Finder</h1>
+            <div>
+              <input
+                type="text"
+                placeholder="Search Restaurants from Nearby"
+                className="restaurant__search__field"
+              />
+            </div>
+            <div className="restaurant__lists">
+              <h2>Restaurants Near 3km of Monsterlab Bangladesh</h2>
+              {this.state.venues.map((item) => {
+                return (
+                  <div
+                    key={item.id}
+                    className="restaurant__list"
+                    onClick={ListOnClickHandler}
+                  >
+                    Name:{item.venue.name}
+                    <br />
+                    Address:-{item.venue.location.address}
+                    <div className="map__icon">
+                      <img src={map} />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     );
   }
