@@ -1,16 +1,22 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { connect } from "react-redux";
 import "./Home.css";
 import MapView from "./MapView";
 import map from "../assets/images/map.png";
 import { useSelector } from "react-redux";
-import { selectMapView } from "../redux/features/userSlice";
+import {
+  selectMapView,
+  setMapView,
+  setRestaurantLatitude,
+  setRestaurantLongitude,
+} from "../redux/features/userSlice";
+
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       venues: [],
-      click: true,
       searchedValue: "",
       name: "",
     };
@@ -41,10 +47,9 @@ class Home extends Component {
   }
 
   render() {
-    const mapView = useSelector(selectMapView);
     return (
       <div>
-        {this.state.click ? (
+        {!this.props.mapView ? (
           <div className="restaurant__main">
             <h1>Restaurant Finder</h1>
             <div>
@@ -73,7 +78,6 @@ class Home extends Component {
                   ) {
                     return val;
                   } else {
-                    alert("Please write a valid location");
                   }
                 })
                 .map((item, key) => {
@@ -82,10 +86,21 @@ class Home extends Component {
                       key={item.id}
                       className="restaurant__list"
                       onClick={() => {
+                        this.props.setMapView(true);
+                        this.props.setRestaurantLatitude(
+                          item.venue.location.lat
+                        );
+                        this.props.setRestaurantLongitude(
+                          item.venue.location.lng
+                        );
+                        this.setState({
+                          searchedValue: "",
+                        });
+
                         console.log(
                           item.venue.name +
                             item.venue.location.address +
-                            mapView
+                            this.props.mapView
                         );
                       }}
                     >
@@ -101,11 +116,41 @@ class Home extends Component {
             </div>
           </div>
         ) : (
-          ""
+          //console.log(this.props.latitude + " " + this.props.longitude)
+          <MapView
+            isMarkerShown
+            googleMapURL="https://maps.googleapis.com/maps/api/js?key="
+            loadingElement={<div style={{ height: `100%` }} />}
+            containerElement={
+              <div
+                style={{
+                  marginLeft: `10px`,
+                  marginRight: `10px`,
+                  marginTop: "10px",
+                  height: `500px`,
+                }}
+              />
+            }
+            mapElement={<div style={{ height: `100%` }} />}
+            latitude={this.props.latitude}
+            longitude={this.props.longitude}
+          />
         )}
       </div>
     );
   }
 }
 
-export default Home;
+const mapStateToProps = (state) => {
+  return {
+    mapView: state.user.mapView,
+    latitude: state.user.restaurantLatitude,
+    longitude: state.user.restaurantLongitude,
+  };
+};
+
+export default connect(mapStateToProps, {
+  setMapView,
+  setRestaurantLatitude,
+  setRestaurantLongitude,
+})(Home);

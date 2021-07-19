@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <Home />
-      <MapView
+      {/* <MapView
         isMarkerShown
         googleMapURL="https://maps.googleapis.com/maps/api/js?key="
         loadingElement={<div style={{ height: `100%` }} />}
@@ -17,7 +17,7 @@ function App() {
           />
         }
         mapElement={<div style={{ height: `100%` }} />}
-      />
+      /> */}
     </div>
   );
 }
