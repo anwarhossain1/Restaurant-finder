@@ -1,0 +1,16 @@
+.back__button > button {
+  background-color: #fc6e51;
+  color: white;
+  position: absolute;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  width: 10vw;
+  height: 5vh;
+  top: 62%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: large;
+}

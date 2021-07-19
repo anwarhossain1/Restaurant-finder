@@ -45,3 +45,17 @@
 .map__icon > img {
   width: 2vw;
 }
+
+@media (max-width: 961px) {
+  .restaurant__lists {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: left;
+  }
+
+  .restaurant__main {
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+}
