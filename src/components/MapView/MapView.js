@@ -1,7 +1,8 @@
 import React from "react";
 import "./MapView.css";
 import { useSelector, useDispatch } from "react-redux";
-import { selectMapView, setMapView } from "../redux/features/userSlice";
+import { selectMapView, setMapView } from "../../redux/features/userSlice";
+
 import {
   GoogleMap,
   withScriptjs,

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import "./Home.css";
-import MapView from "../components/MapView";
+import MapView from "../components/MapView/MapView";
 import map from "../assets/images/map.png";
 
 import {
