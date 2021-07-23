@@ -13,6 +13,7 @@ To run this project into your environment
 ```
 git clone https://github.com/anwarhossain1/Restaurant-finder.git
 cd Restaurant-finder
+yarn or npm
 yarn start or npm start
 ```
 
@@ -36,6 +37,32 @@ yarn start or npm start
 
 ###### Testing
 
-- **JEST**-
-- **Enzyme**-
-- **React Testing Library**-
+- **JEST**- For unit testing and accessing **DOM**, JEST has been used. It is often good enough for testing React components.
+- **Enzyme**- For some integration testing.
+- **React Testing Library**- For Tesing React components without relying on their implementation details.
+
+###### Project Architechture
+
+#### `src/`
+
+This folder contains all the necessary folders and files of the application.
+
+#### `src/assets`
+
+This folder has been craeted for storing all the necessary graphical elements inside here.
+
+#### `src/components`
+
+For accessing all the reusable components from a specific location.
+
+#### `src/pages`
+
+For accessing all the pages from a specific location.
+
+#### `src/redux/app`
+
+Contains store of the project.
+
+#### `src/redux/features`
+
+This folder contains reducers and action creators.
