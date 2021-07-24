@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import RollbarErrorTracking from "../RollBar/RollbarErrorTracking";
 export default class ErrorBoundary extends Component {
   constructor(props) {
     super(props);
@@ -13,6 +13,8 @@ export default class ErrorBoundary extends Component {
   componentDidCatch(error, errorInfo) {
     // You can also log the error to an error reporting service
     //logErrorToMyService(error, errorInfo);
+    RollbarErrorTracking.logErroInfo(errorInfo);
+    RollbarErrorTracking.logErrorInRollbar(error);
   }
   render() {
     if (this.state.hasError) {

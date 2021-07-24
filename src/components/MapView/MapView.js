@@ -40,5 +40,3 @@ const MapView = (props) => {
 };
 
 export default withScriptjs(withGoogleMap(MapView));
-
-//23.781855942223235, 90.40053478743839

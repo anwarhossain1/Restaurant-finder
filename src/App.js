@@ -1,6 +1,6 @@
 import "./App.css";
 import Home from "./pages/Home";
-import ErrorBoundary from "./components/ErrorBoundaries/ErrorBoundary";
+import ErrorBoundary from "./components/ErrorHandling/ErrorBoundaries/ErrorBoundary";
 
 function App() {
   return (
