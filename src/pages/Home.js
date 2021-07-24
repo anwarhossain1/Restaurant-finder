@@ -19,13 +19,14 @@ class Home extends Component {
       searchedValue: "",
       name: "",
       searchInputError: false,
+      error: "",
     };
   }
   componentDidMount() {
     const endPoint = "https://api.foursquare.com/v2/venues/explore?";
     const parameters = {
-      client_id: "MYPHEVZ2NPGXDKM4FTXVUKABFY32XC3QJ2SRWIVHAIMYH2K3",
-      client_secret: "1XT4HBHRUBGFYJRQXB50B1IYXUO3QKE5WZ3TQKY2055QM2IM",
+      client_id: `${process.env.REACT_APP_MAP_API_KEY}`,
+      client_secret: `${process.env.REACT_APP_MAP_API_KEY_CLIENT_SECRET}`,
       ll: "23.782268354296054, 90.40035785396968",
       categoryId: "4d4b7105d754a06374d81259",
       radius: "3000",
@@ -43,10 +44,14 @@ class Home extends Component {
       })
       .catch((error) => {
         console.log(error);
+        this.setState({
+          error: error,
+        });
       });
   }
 
   render() {
+    let i = 0;
     return (
       <div>
         {!this.props.mapView ? (
@@ -67,6 +72,9 @@ class Home extends Component {
             {console.log(this.state.searchedValue)}
             <div className="restaurant__lists">
               <h2>Restaurants Near 3km of Monsterlab Bangladesh</h2>
+              {this.state.error !== "" && (
+                <div className="error__alertbox">{this.state.error}</div>
+              )}
               {this.state.venues
                 .filter((val) => {
                   if (this.state.searchedValue === "") {
@@ -77,7 +85,8 @@ class Home extends Component {
                       .includes(this.state.searchedValue.toLocaleLowerCase())
                   ) {
                     return val;
-                  } else {
+                  } else if (this.state.searchedValue !== val.venue.name) {
+                    console.log("nai kisu");
                   }
                 })
                 .map((item, key) => {
@@ -86,29 +95,36 @@ class Home extends Component {
                       key={item.id}
                       className="restaurant__list"
                       onClick={() => {
-                        this.props.setMapView(true);
-                        this.props.setRestaurantLatitude(
-                          item.venue.location.lat
-                        );
-                        this.props.setRestaurantLongitude(
-                          item.venue.location.lng
-                        );
-                        this.setState({
-                          searchedValue: "",
-                        });
+                        try {
+                          this.props.setMapView(true);
+                          this.props.setRestaurantLatitude(
+                            item.venue.location.lat
+                          );
+                          this.props.setRestaurantLongitude(
+                            item.venue.location.lng
+                          );
+                          this.setState({
+                            searchedValue: "",
+                          });
 
-                        console.log(
-                          item.venue.name +
-                            item.venue.location.address +
-                            this.props.mapView
-                        );
+                          console.log(
+                            item.venue.name +
+                              item.venue.location.address +
+                              this.props.mapView
+                          );
+                        } catch (error) {
+                          console.log(error);
+                          this.setState({
+                            error: error,
+                          });
+                        }
                       }}
                     >
                       Name:-{item.venue.name}
                       <br />
                       Address:-{item.venue.location.address}
                       <div className="map__icon">
-                        <img src={map} />
+                        <img src={map} alt="map icon" />
                       </div>
                     </div>
                   );

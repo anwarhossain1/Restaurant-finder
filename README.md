@@ -1,6 +1,6 @@
 # Restaurant Finder- A platform to find nearby restaurants within 3km
 
-This is a web service by which users can pick a restaurant close to the office. Users can also be able to search restaurants by keyword arround them. By tapping a restaurant from the list exactly below the searchbar given in the platform, users can see the map view of the location.
+This is a web service by which users can pick a restaurant close to the office. Users can also be able to search restaurants arround them by keywords. By tapping a restaurant from the list exactly below the searchbar given in the platform, users can see the map view of the location.
 
 ## Prerequisites
 

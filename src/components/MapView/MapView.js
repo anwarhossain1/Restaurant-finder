@@ -16,7 +16,17 @@ const MapView = (props) => {
   return (
     <div className="map" style={{ marginLeft: "20px" }}>
       <div className="back__button">
-        <button onClick={() => dispatch(setMapView(false))}>Go Back</button>
+        <button
+          onClick={() => {
+            try {
+              dispatch(setMapView(false));
+            } catch (error) {
+              console.log(error);
+            }
+          }}
+        >
+          Go Back
+        </button>
       </div>
       <GoogleMap
         defaultZoom={14}
