@@ -66,3 +66,12 @@ Contains store of the project.
 #### `src/redux/features`
 
 This folder contains reducers and action creators.
+
+## Trade-offs
+
+No trade-offs have been made into the project.
+
+#### I might do differently if I were to spend additional time on the project
+
+1. **Testing**- I would add extra effort of mine to the project to make it more TDD(Test-driven development) friendly. I have tried to add some test cases but got some errors.
+2. **UI/UX**- I would try to show the Mapview of the selected restaurants into a Modal with Backdrop feature.

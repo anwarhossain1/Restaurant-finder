@@ -53,7 +53,6 @@ class Home extends Component {
   }
 
   render() {
-    let i = 0;
     return (
       <div>
         {!this.props.mapView ? (
@@ -87,11 +86,11 @@ class Home extends Component {
                       .includes(this.state.searchedValue.toLocaleLowerCase())
                   ) {
                     return val;
-                  } else if (this.state.searchedValue !== val.venue.name) {
-                    console.log("nai kisu");
+                  } else {
+                    return console.log("Not matched!!!");
                   }
                 })
-                .map((item, key) => {
+                .map((item) => {
                   return (
                     <div
                       key={item.id}

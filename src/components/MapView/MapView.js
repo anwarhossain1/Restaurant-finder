@@ -24,6 +24,7 @@ const MapView = (props) => {
               console.log(error);
             }
           }}
+          data-testid="button"
         >
           Go Back
         </button>

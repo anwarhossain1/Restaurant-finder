@@ -1,4 +1,3 @@
-import React from "react";
 import Rollbar from "rollbar";
 
 export const RollbarErrorTracking = (() => {
