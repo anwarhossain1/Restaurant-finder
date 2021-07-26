@@ -13,7 +13,7 @@ To run this project into your environment
 ```
 git clone https://github.com/anwarhossain1/Restaurant-finder.git
 cd Restaurant-finder
-yarn or npm
+yarn or npm install
 yarn start or npm start
 ```
 
